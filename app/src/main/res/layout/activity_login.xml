@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="#E2E2E2">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="20dp"
+        app:cardCornerRadius="15dp"
+        android:elevation="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/enter_your_email"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:hint="@string/enter_your_password"
+                android:background="@drawable/rounded_edittext"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_below="@id/login_email"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_password"
+                android:layout_margin="10dp"
+                android:text="@string/login"
+                android:background="@drawable/rounded_btn"
+                android:textColor="#000"
+                android:elevation="10dp" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/dont_have_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/don_t_have_an_account"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_below="@id/login"/>
+
+</RelativeLayout>
