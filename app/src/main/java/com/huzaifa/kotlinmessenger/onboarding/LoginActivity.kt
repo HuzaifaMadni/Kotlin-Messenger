@@ -1,8 +1,9 @@
-package com.huzaifa.kotlinmessenger
+package com.huzaifa.kotlinmessenger.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.huzaifa.kotlinmessenger.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

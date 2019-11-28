@@ -1,14 +1,12 @@
-package com.huzaifa.kotlinmessenger
+package com.huzaifa.kotlinmessenger.onboarding
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -17,12 +15,16 @@ import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.parcel.Parcelize
+import com.huzaifa.kotlinmessenger.Chat.LatestMessagesActivity
+import com.huzaifa.kotlinmessenger.R
+import com.huzaifa.kotlinmessenger.models.User
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
+
+    var selectedPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,18 +51,12 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    var selectedPhotoUri: Uri? = null
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-
             selectedPhotoUri = data.data
-
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-
-           circleImage.setImageBitmap(bitmap)
-
+            circleImage.setImageBitmap(bitmap)
             select_photo.alpha = 0f
         }
     }
@@ -68,7 +64,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(): Boolean {
         val email = email.text.toString().trim()
         val password = password.text.toString().trim()
-
         if (email.isEmpty() || password.isEmpty()) return true
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -86,7 +81,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun uploadImageToFirebaseStorage() {
         if (selectedPhotoUri == null) return
-
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
@@ -96,7 +90,6 @@ class RegisterActivity : AppCompatActivity() {
 
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d("RegisterActivity", "File Location: $it")
-
                     saveDataToFirebaseDB(it.toString())
                 }
             }
@@ -105,13 +98,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun saveDataToFirebaseDB(fileUri: String) {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-
         val user = User(uid!!, name.text.toString(), fileUri)
 
         ref.setValue(user)
             .addOnSuccessListener {
                 Toast.makeText(this, "Data Saved", Toast.LENGTH_LONG).show()
-
                 val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -121,8 +112,7 @@ class RegisterActivity : AppCompatActivity() {
     fun isStoragePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED
-            ) {
+                == PackageManager.PERMISSION_GRANTED) {
                 Log.v("Success", "Permission is granted")
                 true
             } else {
@@ -130,8 +120,7 @@ class RegisterActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(READ_EXTERNAL_STORAGE),
-                    1
-                )
+                    1)
                 false
             }
         } else { //permission is automatically granted on sdk<23 upon installation
@@ -141,7 +130,3 @@ class RegisterActivity : AppCompatActivity() {
     }
 }
 
-@Parcelize
-class User (val uid:String, val name: String, val profileImage:String) : Parcelable {
-    constructor() : this("", "", "")
-}
