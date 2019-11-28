@@ -1,4 +1,4 @@
-package com.huzaifa.kotlinmessenger.Chat
+package com.huzaifa.kotlinmessenger.chat
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,22 +17,21 @@ import kotlinx.android.synthetic.main.activity_new_message.*
 
 class NewMessageActivity : AppCompatActivity() {
 
+    val adapter = GroupAdapter<GroupieViewHolder>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
 
         supportActionBar?.title = "Select User"
-        val adapter = GroupAdapter<GroupieViewHolder>()
-
         fetchUsers()
     }
 
     private fun fetchUsers() {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {}
+            override fun onCancelled(p0: DatabaseError) { }
             override fun onDataChange(p0: DataSnapshot) {
-                val adapter = GroupAdapter<GroupieViewHolder>()
                 p0.children.forEach {
                     Log.d("Messages", it.toString())
                     val user = it.getValue(User::class.java)

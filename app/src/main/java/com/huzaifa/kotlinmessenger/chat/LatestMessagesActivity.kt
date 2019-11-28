@@ -1,4 +1,4 @@
-package com.huzaifa.kotlinmessenger.Chat
+package com.huzaifa.kotlinmessenger.chat
 
 import android.content.Intent
 import android.os.Bundle
@@ -35,6 +35,11 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         latest_messages_recycler_view.adapter = adapter
         latest_messages_recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        adapter.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ChatLogActivity::class.java)
+            startActivity(intent)
+        }
 
         verifyUserLoggedIn()
         fetchCurrentUser()

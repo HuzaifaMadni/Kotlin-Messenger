@@ -15,7 +15,7 @@ import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.huzaifa.kotlinmessenger.Chat.LatestMessagesActivity
+import com.huzaifa.kotlinmessenger.chat.LatestMessagesActivity
 import com.huzaifa.kotlinmessenger.R
 import com.huzaifa.kotlinmessenger.models.User
 import kotlinx.android.synthetic.main.activity_main.*

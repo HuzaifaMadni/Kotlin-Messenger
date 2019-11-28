@@ -13,17 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Chat.ChatLogActivity">
+        <activity android:name=".chat.ChatLogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Chat.LatestMessagesActivity" />
+                android:value=".chat.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".Chat.NewMessageActivity">
+        <activity android:name=".chat.NewMessageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Chat.LatestMessagesActivity" />
+                android:value=".chat.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".Chat.LatestMessagesActivity">
+        <activity android:name=".chat.LatestMessagesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

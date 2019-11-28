@@ -1,4 +1,4 @@
-package com.huzaifa.kotlinmessenger.Chat
+package com.huzaifa.kotlinmessenger.chat
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,7 +8,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.huzaifa.kotlinmessenger.Chat.LatestMessagesActivity.Companion.currentUser
+import com.huzaifa.kotlinmessenger.chat.LatestMessagesActivity.Companion.currentUser
 import com.huzaifa.kotlinmessenger.R
 import com.huzaifa.kotlinmessenger.models.ChatItem
 import com.huzaifa.kotlinmessenger.models.ChatItemReverse
